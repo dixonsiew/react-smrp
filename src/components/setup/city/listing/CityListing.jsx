@@ -231,7 +231,7 @@ const CityListing = () => {
               </div>
             )}
           </div>
-          {uiData.totalCount && (
+          {uiData.totalCount > 0 && (
           <div className={`card-footer ${uiData.loading ? 'd-none' : ''}`}>
             <div className="float-start pg-label">
               Page {uiData.page} / {uiData.totalPage} of {uiData.totalCount} record(s)

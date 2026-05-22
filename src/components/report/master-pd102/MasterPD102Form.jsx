@@ -21,63 +21,69 @@ const schema = yup.object({
   CITYCODE: yup.string(),
   CLUSTERFACILITYRN: yup.string(),
   COUNTRY_OF_BIRTH: yup.string(),
-  DISCHARGEOFFICERS: yup.string(),
-  DISCHARGE_DATE: yup.string(),
-
-  DISCHARGE_DOCTOR: yup.string(),
-  DISCHARGE_REASON: yup.string(),
-  DISCHARGE_TIME: yup.string(),
   DOB: yup.string(),
-  DOCUMENT_NUMBER: yup.string(),
 
+  DOCUMENT_NUMBER: yup.string(),
   DOCUMENT_TYPE: yup.string(),
   ETHNIC_GROUP: yup.string(),
   GENDER: yup.string(),
-  HEIGHT: yup.string(),
-  HOME_ADDRESS: yup.string(),
+  PERSON_HEIGHT: yup.string(),
+  PERSON_WEIGHT: yup.string(),
 
+  HOME_ADDRESS: yup.string(),
   HOME_PHONE: yup.string(),
   ISPOLICECASE: yup.string(),
-  LETTEROFGUARANTEE: yup.string(),
   MARITAL_STATUS: yup.string(),
-  MCR_NO: yup.string(),
-
   MOBILE_PHONE: yup.string(),
+
   NATIONALITY: yup.string(),
   NOK_HOME_ADDRESS: yup.string(),
   NOK_HOME_PHONE: yup.string(),
   NOK_ID: yup.string(),
-
   NOK_ID_TYPE: yup.string(),
+
   NOK_MOBILE_PHONE: yup.string(),
   NOK_TITLE: yup.string(),
   OCCUPATION: yup.string(),
   OCITY: yup.string(),
-
   PATIENT_NAME: yup.string(),
+
   PATIENT_NOK_NAME: yup.string(),
   PAYMENT_CLASS_CODE: yup.string(),
   POSTCODE: yup.string(),
   PRIMARY_SPECIALITY: yup.string(),
-
   PRN: yup.string(),
+
   REFERRAL: yup.string(),
   REFFOREIGNRCOUNTRYCODE: yup.string(),
   REFPERSONCATEGORYCODE: yup.string(),
   REGISTRATION_DATE: yup.string(),
-
   REGISTRATION_TIME: yup.string(),
+
   RELATION_DESCRIPTION: yup.string(),
   RELIGION: yup.string(),
   STREET1: yup.string(),
   STREET2: yup.string(),
-
   TITLE: yup.string(),
+
   VISIT_TYPE: yup.string(),
   WARD_NO: yup.string(),
   WEIGHT: yup.string(),
-
   NOK_CITYCODE: yup.string(),
+
+  GRAVIDA: yup.string(),
+  PARITY: yup.string(),
+  GESTATION_PERIOD: yup.string(),
+  ISMOTHERALIVE: yup.string(),
+  REFANTENATALCARECODE: yup.string(),
+  LABOUR_METHOD: yup.string(),
+
+  DELIVERY_DATE: yup.string(),
+  RESULT_OF_BIRTH: yup.string(),
+  DELIVERY_TYPE: yup.string(),
+  CHILD_SEX: yup.string(),
+  LENGTH: yup.string(),
+
   NOK_NATIONALITY: yup.string(),
   NOK_OCITY: yup.string(),
   NOK_POSTCODE: yup.string(),
@@ -85,7 +91,7 @@ const schema = yup.object({
   NOK_STREET2: yup.string()
 }).required()
 
-const MasterPD101Form = () => {
+const MasterPD102Form = () => {
   const navigate = useNavigate()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -120,7 +126,8 @@ const MasterPD101Form = () => {
     state: [],
     admstatus: [],
     occupation: [],
-    visittype: []
+    visittype: [],
+    deliverytype: []
   })
 
   const {
@@ -135,7 +142,7 @@ const MasterPD101Form = () => {
     mode: 'onChange', // validates on change, blur, and submit
   })
 
-  const title = 'PD101'
+  const title = 'PD102'
 
   useEffect(() => {
     if (id) {
@@ -162,7 +169,8 @@ const MasterPD101Form = () => {
       state,
       admstatus,
       occupation,
-      visittype
+      visittype,
+      deliverytype
     ] = await Promise.all([
       LookupService.listEthnicGroup(),
       LookupService.listPersonCategoryCode(),
@@ -180,7 +188,8 @@ const MasterPD101Form = () => {
       LookupService.listState(),
       LookupService.listAdmStatus(),
       LookupService.listOccupation(),
-      LookupService.listVisitTypes()
+      LookupService.listVisitTypes(),
+      LookupService.listDeliveryTypes()
     ])
     setListData(prev => ({
       ...prev,
@@ -200,7 +209,8 @@ const MasterPD101Form = () => {
       state,
       admstatus,
       occupation,
-      visittype
+      visittype,
+      deliverytype
     }))
 
     const response = await ReportService.edit(id)
@@ -416,18 +426,18 @@ const MasterPD101Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">HEIGHT</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="HEIGHT" name="HEIGHT"
-                        className={`form-control ${errors.HEIGHT ? 'is-invalid' : ''}`}
-                        {...register('HEIGHT')}
+                      <input type="text" placeholder="HEIGHT" name="PERSON_HEIGHT"
+                        className={`form-control ${errors.PERSON_HEIGHT ? 'is-invalid' : ''}`}
+                        {...register('PERSON_HEIGHT')}
                       />
                     </div>
                   </div>
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">WEIGHT</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="WEIGHT" name="WEIGHT"
-                        className={`form-control ${errors.WEIGHT ? 'is-invalid' : ''}`}
-                        {...register('WEIGHT')}
+                      <input type="text" placeholder="WEIGHT" name="PERSON_WEIGHT"
+                        className={`form-control ${errors.PERSON_WEIGHT ? 'is-invalid' : ''}`}
+                        {...register('PERSON_WEIGHT')}
                       />
                     </div>
                   </div>
@@ -755,6 +765,142 @@ const MasterPD101Form = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="card-title m-0">Labour</h5>
+                </div>
+                <div className="card-body">
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">GRAVIDA</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="GRAVIDA" name="GRAVIDA"
+                        className={`form-control ${errors.GRAVIDA ? 'is-invalid' : ''}`}
+                        {...register('GRAVIDA')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">PARITY</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="PARITY" name="PARITY"
+                        className={`form-control ${errors.PARITY ? 'is-invalid' : ''}`}
+                        {...register('PARITY')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">GESTATION PERIOD</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="GESTATION PERIOD" name="GESTATION_PERIOD"
+                        className={`form-control ${errors.GESTATION_PERIOD ? 'is-invalid' : ''}`}
+                        {...register('GESTATION_PERIOD')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">IS MOTHER ALIVE</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="ISMOTHERALIVE TIME" name="ISMOTHERALIVE"
+                        className={`form-control ${errors.ISMOTHERALIVE ? 'is-invalid' : ''}`}
+                        {...register('ISMOTHERALIVE')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">ANTENATAL CARE</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="REFANTENATALCARECODE" name="REFANTENATALCARECODE"
+                        className={`form-control ${errors.REFANTENATALCARECODE ? 'is-invalid' : ''}`}
+                        {...register('REFANTENATALCARECODE')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">LABOUR METHOD</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="LABOUR METHOD" name="LABOUR_METHOD"
+                        className={`form-control ${errors.LABOUR_METHOD ? 'is-invalid' : ''}`}
+                        {...register('LABOUR_METHOD')}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="card-title m-0">Labour</h5>
+                </div>
+                <div className="card-body">
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DELIVERY DATE</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="DELIVERY DATE" name="DELIVERY_DATE" 
+                        className={`form-control ${errors.DELIVERY_DATE ? 'is-invalid' : ''}`}
+                        {...register('DELIVERY_DATE')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">RESULT OF BIRTH</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="RESULT_OF_BIRTH" name="RESULT_OF_BIRTH"
+                        className={`form-control ${errors.RESULT_OF_BIRTH ? 'is-invalid' : ''}`}
+                        {...register('RESULT_OF_BIRTH')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DELIVERY TYPE</label>
+                    <div className="col-sm-10">
+                      <div className="input-group">
+                        <input type="text" className="form-control" name="DELIVERY_TYPE" {...register('DELIVERY_TYPE')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Delivery Type', listData.deliverytype, 'DELIVERY_TYPE')}>
+                          <i className="fa fa-database"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">CHILD SEX</label>
+                    <div className="col-sm-10">
+                      <div className="input-group">
+                        <input type="text" className="form-control" name="CHILD_SEX" {...register('CHILD_SEX')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Child Sex', listData.gender, 'CHILD_SEX')}>
+                          <i className="fa fa-database"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">WEIGHT</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="WEIGHT" name="WEIGHT"
+                        className={`form-control ${errors.WEIGHT ? 'is-invalid' : ''}`}
+                        {...register('WEIGHT')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">LENGTH</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="LENGTH" name="LENGTH"
+                        className={`form-control ${errors.LENGTH ? 'is-invalid' : ''}`}
+                        {...register('LENGTH')}
+                      />
+                    </div>
+                  </div>
+                </div>
                 <div className="card-footer">
                   <button type="button" className="btn btn-outline-dark me-2" onClick={() => navigate(-1)}><i className="fas fa-chevron-circle-left"></i> Back</button>
                   <button type="submit" className="btn btn-primary"><i className="fas fa-save"></i> Save</button>
@@ -786,4 +932,4 @@ const MasterPD101Form = () => {
   )
 }
 
-export default MasterPD101Form
+export default MasterPD102Form

@@ -15,11 +15,11 @@ import { AppConstant } from '../../../constants'
 import { Helper } from '../../../utils/helper'
 import download from 'downloadjs'
 
-const MasterPD101Listing = () => {
-  const uiState = 'report.master-pd101.master-pd101-listing'
-  const title = 'PD101'
-  const placeholderdateFrom = 'Admission From Date'
-  const placeholderdateTo = 'Admission To Date'
+const MasterPD301Listing = () => {
+  const uiState = 'report.master-pd301.master-pd301-listing'
+  const title = 'PD301'
+  const placeholderdateFrom = 'Discharge From Date'
+  const placeholderdateTo = 'Discharge To Date'
   const pageSize = AppConstant.PAGE_SIZE
 
   const navigate = useNavigate()
@@ -162,7 +162,7 @@ const MasterPD101Listing = () => {
 
   const goto = (path) => {
     saveUIState()
-    navigate(`/main/report/master-pd101/${path}`, { replace: false })
+    navigate(`/main/report/master-pd301/${path}`, { replace: false })
   }
 
   const onEdit = (item) => {
@@ -334,4 +334,4 @@ const MasterPD101Listing = () => {
   )
 }
 
-export default MasterPD101Listing
+export default MasterPD301Listing

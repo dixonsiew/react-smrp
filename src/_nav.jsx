@@ -89,27 +89,27 @@ const _nav = [
       {
         component: CNavItem,
         name: 'RH101',
-        to: '/master-rh101/list',
+        to: '/main/report/master-rh101/list',
       },
       {
         component: CNavItem,
         name: 'PD301',
-        to: '/master-pd301/list',
+        to: '/main/report/master-pd301/list',
       },
       {
         component: CNavItem,
         name: 'RH301',
-        to: '/master-rh301/list',
+        to: '/main/report/master-rh301/list',
       },
       {
         component: CNavItem,
         name: 'PD102',
-        to: '/master-pd102/list',
+        to: '/main/report/master-pd102/list',
       },
       {
         component: CNavItem,
         name: 'PD105',
-        to: '/master-pd105/list',
+        to: '/main/report/master-pd105/list',
       },
     ],
   },

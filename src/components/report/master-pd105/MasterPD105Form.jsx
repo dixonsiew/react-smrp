@@ -21,12 +21,6 @@ const schema = yup.object({
   CITYCODE: yup.string(),
   CLUSTERFACILITYRN: yup.string(),
   COUNTRY_OF_BIRTH: yup.string(),
-  DISCHARGEOFFICERS: yup.string(),
-  DISCHARGE_DATE: yup.string(),
-
-  DISCHARGE_DOCTOR: yup.string(),
-  DISCHARGE_REASON: yup.string(),
-  DISCHARGE_TIME: yup.string(),
   DOB: yup.string(),
   DOCUMENT_NUMBER: yup.string(),
 
@@ -38,44 +32,43 @@ const schema = yup.object({
 
   HOME_PHONE: yup.string(),
   ISPOLICECASE: yup.string(),
-  LETTEROFGUARANTEE: yup.string(),
   MARITAL_STATUS: yup.string(),
-  MCR_NO: yup.string(),
-
   MOBILE_PHONE: yup.string(),
   NATIONALITY: yup.string(),
+
   NOK_HOME_ADDRESS: yup.string(),
   NOK_HOME_PHONE: yup.string(),
   NOK_ID: yup.string(),
-
   NOK_ID_TYPE: yup.string(),
   NOK_MOBILE_PHONE: yup.string(),
-  NOK_TITLE: yup.string(),
-  OCCUPATION: yup.string(),
-  OCITY: yup.string(),
 
+  NOK_TITLE: yup.string(),
+  OCITY: yup.string(),
   PATIENT_NAME: yup.string(),
   PATIENT_NOK_NAME: yup.string(),
+
   PAYMENT_CLASS_CODE: yup.string(),
   POSTCODE: yup.string(),
-  PRIMARY_SPECIALITY: yup.string(),
-
+  PRIMARY_SPECIALTY: yup.string(),
   PRN: yup.string(),
   REFERRAL: yup.string(),
+
   REFFOREIGNRCOUNTRYCODE: yup.string(),
   REFPERSONCATEGORYCODE: yup.string(),
   REGISTRATION_DATE: yup.string(),
-
   REGISTRATION_TIME: yup.string(),
   RELATION_DESCRIPTION: yup.string(),
+
   RELIGION: yup.string(),
   STREET1: yup.string(),
   STREET2: yup.string(),
-
   TITLE: yup.string(),
   VISIT_TYPE: yup.string(),
+
   WARD_NO: yup.string(),
   WEIGHT: yup.string(),
+
+  DEATH_DATE: yup.string(),
 
   NOK_CITYCODE: yup.string(),
   NOK_NATIONALITY: yup.string(),
@@ -85,7 +78,7 @@ const schema = yup.object({
   NOK_STREET2: yup.string()
 }).required()
 
-const MasterPD101Form = () => {
+const MasterPD105Form = () => {
   const navigate = useNavigate()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -135,7 +128,7 @@ const MasterPD101Form = () => {
     mode: 'onChange', // validates on change, blur, and submit
   })
 
-  const title = 'PD101'
+  const title = 'PD105'
 
   useEffect(() => {
     if (id) {
@@ -736,8 +729,8 @@ const MasterPD101Form = () => {
                     <label className="col-sm-2 col-form-label">PRIMARY SPECIALITY</label>
                     <div className="col-sm-10">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="PRIMARY_SPECIALITY" {...register('PRIMARY_SPECIALITY')} />
-                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Primary Speciality', listData.speciality, 'PRIMARY_SPECIALITY')}>
+                        <input type="text" className="form-control" name="PRIMARY_SPECIALTY" {...register('PRIMARY_SPECIALTY')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Primary Speciality', listData.speciality, 'PRIMARY_SPECIALTY')}>
                           <i className="fa fa-database"></i>
                         </button>
                       </div>
@@ -750,6 +743,29 @@ const MasterPD101Form = () => {
                         <input type="text" className="form-control" name="PAYMENT_CLASS_CODE" {...register('PAYMENT_CLASS_CODE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Payment Class', listData.wardcls, 'PAYMENT_CLASS_CODE')}>
                           <i className="fa fa-database"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="card-title m-0">Death</h5>
+                </div>
+                <div className="card-body">
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DEATH DATE</label>
+                    <div className="col-sm-4">
+                      <div className="input-group">
+                        <input type="text" className="form-control" name="DEATH_DATE" {...register('DEATH_DATE')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowCalendar('DEATH_DATE')}>
+                          <i className="fa fa-calendar-alt"></i>
                         </button>
                       </div>
                     </div>
@@ -786,4 +802,4 @@ const MasterPD101Form = () => {
   )
 }
 
-export default MasterPD101Form
+export default MasterPD105Form

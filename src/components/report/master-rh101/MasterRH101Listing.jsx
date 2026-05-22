@@ -15,9 +15,9 @@ import { AppConstant } from '../../../constants'
 import { Helper } from '../../../utils/helper'
 import download from 'downloadjs'
 
-const MasterPD101Listing = () => {
-  const uiState = 'report.master-pd101.master-pd101-listing'
-  const title = 'PD101'
+const MasterRH101Listing = () => {
+  const uiState = 'report.master-rh101.master-rh101-listing'
+  const title = 'RH101'
   const placeholderdateFrom = 'Admission From Date'
   const placeholderdateTo = 'Admission To Date'
   const pageSize = AppConstant.PAGE_SIZE
@@ -162,7 +162,7 @@ const MasterPD101Listing = () => {
 
   const goto = (path) => {
     saveUIState()
-    navigate(`/main/report/master-pd101/${path}`, { replace: false })
+    navigate(`/main/report/master-rh101/${path}`, { replace: false })
   }
 
   const onEdit = (item) => {
@@ -334,4 +334,4 @@ const MasterPD101Listing = () => {
   )
 }
 
-export default MasterPD101Listing
+export default MasterRH101Listing

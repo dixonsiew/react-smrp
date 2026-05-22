@@ -21,58 +21,63 @@ const schema = yup.object({
   CITYCODE: yup.string(),
   CLUSTERFACILITYRN: yup.string(),
   COUNTRY_OF_BIRTH: yup.string(),
+  DESCRIPTION: yup.string(),
+  DIAGNOSIS_DESC: yup.string(),
+
   DISCHARGEOFFICERS: yup.string(),
   DISCHARGE_DATE: yup.string(),
-
   DISCHARGE_DOCTOR: yup.string(),
   DISCHARGE_REASON: yup.string(),
   DISCHARGE_TIME: yup.string(),
+
   DOB: yup.string(),
   DOCUMENT_NUMBER: yup.string(),
-
   DOCUMENT_TYPE: yup.string(),
   ETHNIC_GROUP: yup.string(),
   GENDER: yup.string(),
+
   HEIGHT: yup.string(),
   HOME_ADDRESS: yup.string(),
-
   HOME_PHONE: yup.string(),
+  ICD10_CODE: yup.string(),
+  ICD10_DESCRIPTION: yup.string(),
+
   ISPOLICECASE: yup.string(),
   LETTEROFGUARANTEE: yup.string(),
   MARITAL_STATUS: yup.string(),
   MCR_NO: yup.string(),
-
   MOBILE_PHONE: yup.string(),
+
   NATIONALITY: yup.string(),
   NOK_HOME_ADDRESS: yup.string(),
   NOK_HOME_PHONE: yup.string(),
   NOK_ID: yup.string(),
-
   NOK_ID_TYPE: yup.string(),
+
   NOK_MOBILE_PHONE: yup.string(),
   NOK_TITLE: yup.string(),
   OCCUPATION: yup.string(),
   OCITY: yup.string(),
-
   PATIENT_NAME: yup.string(),
+
   PATIENT_NOK_NAME: yup.string(),
   PAYMENT_CLASS_CODE: yup.string(),
   POSTCODE: yup.string(),
-  PRIMARY_SPECIALITY: yup.string(),
-
+  PRIMARY_SPECIALTY: yup.string(),
   PRN: yup.string(),
+
   REFERRAL: yup.string(),
   REFFOREIGNRCOUNTRYCODE: yup.string(),
   REFPERSONCATEGORYCODE: yup.string(),
   REGISTRATION_DATE: yup.string(),
-
   REGISTRATION_TIME: yup.string(),
+
   RELATION_DESCRIPTION: yup.string(),
   RELIGION: yup.string(),
   STREET1: yup.string(),
   STREET2: yup.string(),
-
   TITLE: yup.string(),
+
   VISIT_TYPE: yup.string(),
   WARD_NO: yup.string(),
   WEIGHT: yup.string(),
@@ -85,7 +90,7 @@ const schema = yup.object({
   NOK_STREET2: yup.string()
 }).required()
 
-const MasterPD101Form = () => {
+const MasterPD301Form = () => {
   const navigate = useNavigate()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -120,7 +125,8 @@ const MasterPD101Form = () => {
     state: [],
     admstatus: [],
     occupation: [],
-    visittype: []
+    visittype: [],
+    diagitemtype: []
   })
 
   const {
@@ -135,7 +141,7 @@ const MasterPD101Form = () => {
     mode: 'onChange', // validates on change, blur, and submit
   })
 
-  const title = 'PD101'
+  const title = 'PD301'
 
   useEffect(() => {
     if (id) {
@@ -162,7 +168,8 @@ const MasterPD101Form = () => {
       state,
       admstatus,
       occupation,
-      visittype
+      visittype,
+      diagitemtype
     ] = await Promise.all([
       LookupService.listEthnicGroup(),
       LookupService.listPersonCategoryCode(),
@@ -180,7 +187,8 @@ const MasterPD101Form = () => {
       LookupService.listState(),
       LookupService.listAdmStatus(),
       LookupService.listOccupation(),
-      LookupService.listVisitTypes()
+      LookupService.listVisitTypes(),
+      LookupService.listDiagItemTypes()
     ])
     setListData(prev => ({
       ...prev,
@@ -200,7 +208,8 @@ const MasterPD101Form = () => {
       state,
       admstatus,
       occupation,
-      visittype
+      visittype,
+      diagitemtype
     }))
 
     const response = await ReportService.edit(id)
@@ -736,8 +745,8 @@ const MasterPD101Form = () => {
                     <label className="col-sm-2 col-form-label">PRIMARY SPECIALITY</label>
                     <div className="col-sm-10">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="PRIMARY_SPECIALITY" {...register('PRIMARY_SPECIALITY')} />
-                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Primary Speciality', listData.speciality, 'PRIMARY_SPECIALITY')}>
+                        <input type="text" className="form-control" name="PRIMARY_SPECIALTY" {...register('PRIMARY_SPECIALTY')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Primary Speciality', listData.speciality, 'PRIMARY_SPECIALTY')}>
                           <i className="fa fa-database"></i>
                         </button>
                       </div>
@@ -752,6 +761,76 @@ const MasterPD101Form = () => {
                           <i className="fa fa-database"></i>
                         </button>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-header">
+                  <h5 className="card-title m-0">Discharge</h5>
+                </div>
+                <div className="card-body">
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DISCHARGE DATE</label>
+                    <div className="col-sm-4">
+                      <div className="input-group">
+                        <input type="text" className="form-control" name="DISCHARGE_DATE" {...register('DISCHARGE_DATE')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowCalendar('DISCHARGE_DATE')}>
+                          <i className="fa fa-calendar-alt"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DISCHARGE TIME</label>
+                    <div className="col-sm-4">
+                      <input type="text" placeholder="DISCHARGE TIME" name="DISCHARGE_TIME"
+                        className={`form-control ${errors.DISCHARGE_TIME ? 'is-invalid' : ''}`}
+                        {...register('DISCHARGE_TIME')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DISCHARGE REASON</label>
+                    <div className="col-sm-10">
+                      <input type="text" placeholder="DISCHARGE REASON" name="DISCHARGE_REASON"
+                        className={`form-control ${errors.DISCHARGE_REASON ? 'is-invalid' : ''}`}
+                        {...register('DISCHARGE_REASON')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">DIAGNOSIS DESC</label>
+                    <div className="col-sm-10">
+                      <div className="input-group">
+                        <input type="text" className="form-control" name="DIAGNOSIS_DESC" {...register('DIAGNOSIS_DESC')} />
+                        <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Diagnosis Desc', listData.diagitemtype, 'DIAGNOSIS_DESC')}>
+                          <i className="fa fa-database"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">ICD CODE</label>
+                    <div className="col-sm-10">
+                      <input type="text" placeholder="ICD CODE" name="ICD10_CODE"
+                        className={`form-control ${errors.ICD10_CODE ? 'is-invalid' : ''}`}
+                        {...register('ICD10_CODE')}
+                      />
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <label className="col-sm-2 col-form-label">ICD DESC</label>
+                    <div className="col-sm-10">
+                      <input type="text" placeholder="ICD DESC" name="ICD10_DESCRIPTION"
+                        className={`form-control ${errors.ICD10_DESCRIPTION ? 'is-invalid' : ''}`}
+                        {...register('ICD10_DESCRIPTION')}
+                      />
                     </div>
                   </div>
                 </div>
@@ -786,4 +865,4 @@ const MasterPD101Form = () => {
   )
 }
 
-export default MasterPD101Form
+export default MasterPD301Form

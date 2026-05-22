@@ -85,7 +85,7 @@ const schema = yup.object({
   NOK_STREET2: yup.string()
 }).required()
 
-const MasterPD101Form = () => {
+const MasterRH101Form = () => {
   const navigate = useNavigate()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -135,7 +135,7 @@ const MasterPD101Form = () => {
     mode: 'onChange', // validates on change, blur, and submit
   })
 
-  const title = 'PD101'
+  const title = 'RH101'
 
   useEffect(() => {
     if (id) {
@@ -786,4 +786,4 @@ const MasterPD101Form = () => {
   )
 }
 
-export default MasterPD101Form
+export default MasterRH101Form
