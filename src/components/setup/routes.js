@@ -34,6 +34,8 @@ const StateListing = React.lazy(() => import('./state/listing/listing'))
 const StateCreate = React.lazy(() => import('./state/create/create'))
 const TitleListing = React.lazy(() => import('./title/listing/listing'))
 const TitleCreate = React.lazy(() => import('./title/create/create'))
+const UserListing = React.lazy(() => import('./user/listing/listing'))
+const UserCreate = React.lazy(() => import('./user/create/create'))
 const VisitTypeListing = React.lazy(() => import('./visit-type/listing/listing'))
 const VisitTypeCreate = React.lazy(() => import('./visit-type/create/create'))
 const AdmStatusListing = React.lazy(() => import('./adm-status/listing/listing'))
@@ -296,6 +298,21 @@ export const setupRoutes = [
     path: '/main/setup/title/edit/:id',
     name: 'Title Edit',
     element: TitleCreate
+  },
+  {
+    path: '/main/setup/user/list',
+    name: 'User List',
+    element: UserListing
+  },
+  {
+    path: '/main/setup/user/create',
+    name: 'User Create',
+    element: UserCreate
+  },
+  {
+    path: '/main/setup/user/edit/:id',
+    name: 'User Edit',
+    element: UserCreate
   },
   {
     path: '/main/setup/visit-type/list',

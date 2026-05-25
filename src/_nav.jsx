@@ -206,6 +206,11 @@ const _nav = [
       },
       {
         component: CNavItem,
+        name: 'User',
+        to: '/main/setup/user/list',
+      },
+      {
+        component: CNavItem,
         name: 'Visit Type',
         to: '/main/setup/visit-type/list',
       },
