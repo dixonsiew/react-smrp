@@ -159,6 +159,66 @@ const _nav = [
         name: 'Gender',
         to: '/main/setup/gender/list',
       },
+      {
+        component: CNavItem,
+        name: 'ID Type',
+        to: '/main/setup/id-type/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Marital Status',
+        to: '/main/setup/marital-status/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Person Category Code',
+        to: '/main/setup/person-category-code/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Referral',
+        to: '/main/setup/referral/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Relationship',
+        to: '/main/setup/relationship/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Religion',
+        to: '/main/setup/religion/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Speciality',
+        to: '/main/setup/speciality/list',
+      },
+      {
+        component: CNavItem,
+        name: 'State',
+        to: '/main/setup/state/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Title',
+        to: '/main/setup/title/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Visit Type',
+        to: '/main/setup/visit-type/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Ward Admission Status',
+        to: '/main/setup/adm-status/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Ward Class',
+        to: '/main/setup/ward-class/list',
+      },
     ],
   },
   {

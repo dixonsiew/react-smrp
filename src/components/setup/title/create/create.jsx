@@ -2,11 +2,11 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Create from '../../Create'
-import { IdTypeService } from '../api'
+import { TitleService } from '../api'
 import { AppLoading } from '../../../AppLoading'
 
-const IdTypeCreate = () => {
-  const title = 'ID Type'
+const TitleCreate = () => {
+  const title = 'Title'
   const childRef = useRef()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -24,7 +24,7 @@ const IdTypeCreate = () => {
 
   const load = async () => {
     setLoading(true)
-    const response = await IdTypeService.edit(id)
+    const response = await TitleService.edit(id)
     if (response) {
       setData(response)
       setLoading(false)
@@ -33,13 +33,13 @@ const IdTypeCreate = () => {
 
   const formSubmit = async (data) => {
     if (!edit) {
-      const b = await IdTypeService.create(data)
+      const b = await TitleService.create(data)
       if (b) {
         toast.success(`New ${title} successfully created`)
         childRef.current.resetForm()
       }
     } else {
-      const b = await IdTypeService.update(id, data)
+      const b = await TitleService.update(id, data)
       if (b) {
         toast.success(`${title} successfully updated`)
       }
@@ -61,4 +61,4 @@ const IdTypeCreate = () => {
   )
 }
 
-export default IdTypeCreate
+export default TitleCreate

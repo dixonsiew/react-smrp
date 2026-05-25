@@ -6,12 +6,12 @@ import { AppLoading } from '../../../AppLoading'
 import { SearchInput } from '../../../SearchInput'
 import { SortColumn } from '../../../SortColumn'
 import { ConfirmModal } from '../../../ConfirmModal'
-import { DischargeOfficerService } from '../api'
+import { TitleService } from '../api'
 import { AppConstant } from '../../../../constants'
 
-const DischargeOfficerListing = () => {
-  const uiState = 'setup.discharge-officer.discharge-officer-listing'
-  const title = 'Discharge Officer Type'
+const TitleListing = () => {
+  const uiState = 'setup.title.title-listing'
+  const title = 'Title'
   const pageSize = AppConstant.PAGE_SIZE
 
   const navigate = useNavigate()
@@ -63,7 +63,7 @@ const DischargeOfficerListing = () => {
   const load = async () => {
     setUiData(prev => ({ ...prev, loading: true }))
     try {
-      const response = await DischargeOfficerService.list(uiData.page, pageSize, uiData.sort, uiData.sortDir)
+      const response = await TitleService.list(uiData.page, pageSize, uiData.sort, uiData.sortDir)
       setUiData(prev => ({
         ...prev,
         loading: false,
@@ -82,7 +82,7 @@ const DischargeOfficerListing = () => {
   const onSearch = async (e) => {
     setUiData(prev => ({ ...prev, search: e, page: 1, loading: true }))
     try {
-      const response = await DischargeOfficerService.search(uiData.page, pageSize, uiData.sort, uiData.sortDir, e)
+      const response = await TitleService.search(uiData.page, pageSize, uiData.sort, uiData.sortDir, e)
       setUiData(prev => ({
         ...prev,
         loading: false,
@@ -130,7 +130,7 @@ const DischargeOfficerListing = () => {
 
   const goto = (path) => {
     saveUIState()
-    navigate(`/main/setup/discharge-officer/${path}`, { replace: false })
+    navigate(`/main/setup/title/${path}`, { replace: false })
   }
 
   const onEdit = (item) => {
@@ -147,7 +147,7 @@ const DischargeOfficerListing = () => {
   }
 
   const onConfirmDelete = async () => {
-    const b = await DischargeOfficerService.remove(deleteModal.id)
+    const b = await TitleService.remove(deleteModal.id)
     if (b) {
       toast.success(`${title} successfully deleted`)
       setDeleteModal(prev => ({ ...prev, show: false }))
@@ -258,4 +258,4 @@ const DischargeOfficerListing = () => {
   )
 }
 
-export default DischargeOfficerListing
+export default TitleListing

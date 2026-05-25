@@ -174,7 +174,7 @@ const GenderListing = () => {
         </div>
       </div>
       <div className="container-fluid">
-        <div className="card">
+        <div className="card mb-2">
           <div className="card-header">
             <div className="row">
               <div className="col-sm-6 col-12 p-1">

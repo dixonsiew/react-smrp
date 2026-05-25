@@ -1,7 +1,7 @@
 import { BASE_URL } from '../../../api/config'
 import axios from 'axios'
 
-export class IdTypeService {
+export class SpecialityService {
 
   static async list(page, limit, sort, dir) {
     const params = {
@@ -15,7 +15,7 @@ export class IdTypeService {
       params['sort'] = `${sort}:${dir}`
     }
     try {
-      const response = await axios.get(`${BASE_URL}/api/id-types`, { params })
+      const response = await axios.get(`${BASE_URL}/api/specialities`, { params })
       return {
         data: response.data,
         headers: response.headers,
@@ -37,7 +37,7 @@ export class IdTypeService {
       params['sort'] = `${sort}:${dir}`
     }
     try {
-      const response = await axios.post(`${BASE_URL}/api/id-types`, { keyword }, { params })
+      const response = await axios.post(`${BASE_URL}/api/specialities`, { keyword }, { params })
       return {
         data: response.data,
         headers: response.headers,
@@ -49,7 +49,7 @@ export class IdTypeService {
 
   static async create(data) {
     try {
-      await axios.post(`${BASE_URL}/api/id-type`, data)
+      await axios.post(`${BASE_URL}/api/speciality`, data)
       return true
     } catch (error) {
       return false
@@ -58,7 +58,7 @@ export class IdTypeService {
 
   static async edit(id) {
     try {
-      const response = await axios.get(`${BASE_URL}/api/id-type/${id}`)
+      const response = await axios.get(`${BASE_URL}/api/speciality/${id}`)
       return response.data
     } catch (error) {
       return null
@@ -67,7 +67,7 @@ export class IdTypeService {
 
   static async update(id, data) {
     try {
-      await axios.put(`${BASE_URL}/api/id-type/${id}`, data)
+      await axios.put(`${BASE_URL}/api/speciality/${id}`, data)
       return true
     } catch (error) {
       return false
@@ -76,7 +76,7 @@ export class IdTypeService {
 
   static async remove(id) {
     try {
-      await axios.delete(`${BASE_URL}/api/id-type/${id}`)
+      await axios.delete(`${BASE_URL}/api/speciality/${id}`)
       return true
     } catch (error) {
       return false
