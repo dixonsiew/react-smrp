@@ -56,7 +56,7 @@ const ChangePw = () => {
           <div className='card mb-4'>
             <div className='card-body'>
               <div className='form-group row'>
-                <label class="col-sm-2 col-form-label">Password&nbsp;<span class="text-danger">*</span></label>
+                <label className="col-sm-2 col-form-label">Password&nbsp;<span className="text-danger">*</span></label>
                 <div className='col-sm-10'>
                   <div className='input-group mb-2 has-validation'>
                     <input type={viewpwd} placeholder="Password" name="password"
@@ -71,7 +71,7 @@ const ChangePw = () => {
                 </div>
               </div>
               <div className='form-group row'>
-                <label class="col-sm-2 col-form-label">Confirm Password&nbsp;<span class="text-danger">*</span></label>
+                <label className="col-sm-2 col-form-label">Confirm Password&nbsp;<span className="text-danger">*</span></label>
                 <div className='col-sm-10'>
                   <div className='input-group mb-3 has-validation'>
                     <input type={viewcfmpwd} placeholder="Confirm Password" name="confirmPassword"

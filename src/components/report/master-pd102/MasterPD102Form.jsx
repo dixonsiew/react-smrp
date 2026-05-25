@@ -3,93 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+
 import { ReportService } from './api'
 import { LookupService } from '../../../api/lookup'
 import CalendarModal from '../../CalendarModal'
 import LookupModal from '../../LookupModal'
 import { AppLoading } from '../../AppLoading'
 import { Helper } from '../../../utils/helper'
-
-const schema = yup.object({
-  ACCOUNT_NO: yup.string(),
-  ADMISSION_DATE: yup.string(),
-  ADMISSION_STATUS: yup.string(),
-  ADMISSION_TIME: yup.string(),
-  CHARGE_CATEGORY_CODE: yup.string(),
-
-  CITYCODE: yup.string(),
-  CLUSTERFACILITYRN: yup.string(),
-  COUNTRY_OF_BIRTH: yup.string(),
-  DOB: yup.string(),
-
-  DOCUMENT_NUMBER: yup.string(),
-  DOCUMENT_TYPE: yup.string(),
-  ETHNIC_GROUP: yup.string(),
-  GENDER: yup.string(),
-  PERSON_HEIGHT: yup.string(),
-  PERSON_WEIGHT: yup.string(),
-
-  HOME_ADDRESS: yup.string(),
-  HOME_PHONE: yup.string(),
-  ISPOLICECASE: yup.string(),
-  MARITAL_STATUS: yup.string(),
-  MOBILE_PHONE: yup.string(),
-
-  NATIONALITY: yup.string(),
-  NOK_HOME_ADDRESS: yup.string(),
-  NOK_HOME_PHONE: yup.string(),
-  NOK_ID: yup.string(),
-  NOK_ID_TYPE: yup.string(),
-
-  NOK_MOBILE_PHONE: yup.string(),
-  NOK_TITLE: yup.string(),
-  OCCUPATION: yup.string(),
-  OCITY: yup.string(),
-  PATIENT_NAME: yup.string(),
-
-  PATIENT_NOK_NAME: yup.string(),
-  PAYMENT_CLASS_CODE: yup.string(),
-  POSTCODE: yup.string(),
-  PRIMARY_SPECIALITY: yup.string(),
-  PRN: yup.string(),
-
-  REFERRAL: yup.string(),
-  REFFOREIGNRCOUNTRYCODE: yup.string(),
-  REFPERSONCATEGORYCODE: yup.string(),
-  REGISTRATION_DATE: yup.string(),
-  REGISTRATION_TIME: yup.string(),
-
-  RELATION_DESCRIPTION: yup.string(),
-  RELIGION: yup.string(),
-  STREET1: yup.string(),
-  STREET2: yup.string(),
-  TITLE: yup.string(),
-
-  VISIT_TYPE: yup.string(),
-  WARD_NO: yup.string(),
-  WEIGHT: yup.string(),
-  NOK_CITYCODE: yup.string(),
-
-  GRAVIDA: yup.string(),
-  PARITY: yup.string(),
-  GESTATION_PERIOD: yup.string(),
-  ISMOTHERALIVE: yup.string(),
-  REFANTENATALCARECODE: yup.string(),
-  LABOUR_METHOD: yup.string(),
-
-  DELIVERY_DATE: yup.string(),
-  RESULT_OF_BIRTH: yup.string(),
-  DELIVERY_TYPE: yup.string(),
-  CHILD_SEX: yup.string(),
-  LENGTH: yup.string(),
-
-  NOK_NATIONALITY: yup.string(),
-  NOK_OCITY: yup.string(),
-  NOK_POSTCODE: yup.string(),
-  NOK_STREET1: yup.string(),
-  NOK_STREET2: yup.string()
-}).required()
+import { schema } from './schema'
 
 const MasterPD102Form = () => {
   const navigate = useNavigate()
@@ -291,7 +212,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">ACCOUNT NO</label>
                     <div className="col-sm-10">
-                      <input type="text" placeholder="ACCOUNT NO" name="ACCOUNT_NO" readOnly={true}
+                      <input type="text" placeholder="ACCOUNT NO" readOnly={true}
                         className={`form-control ${errors.ACCOUNT_NO ? 'is-invalid' : ''}`}
                         {...register('ACCOUNT_NO')}
                       />
@@ -301,7 +222,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">PRN</label>
                     <div className="col-sm-10">
-                      <input type="text" placeholder="PRN" name="PRN" readOnly={true}
+                      <input type="text" placeholder="PRN" readOnly={true}
                         className={`form-control ${errors.PRN ? 'is-invalid' : ''}`}
                         {...register('PRN')}
                       />
@@ -310,7 +231,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">REG DATE</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="REG DATE" name="REGISTRATION_DATE" readOnly={true}
+                      <input type="text" placeholder="REG DATE" readOnly={true}
                         className={`form-control ${errors.REGISTRATION_DATE ? 'is-invalid' : ''}`}
                         {...register('REGISTRATION_DATE')}
                       />
@@ -319,7 +240,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">REG TIME</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="REG TIME" name="REGISTRATION_TIME" readOnly={true}
+                      <input type="text" placeholder="REG TIME" readOnly={true}
                         className={`form-control ${errors.REGISTRATION_TIME ? 'is-invalid' : ''}`}
                         {...register('REGISTRATION_TIME')}
                       />
@@ -341,7 +262,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">TITLE</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="TITLE" {...register('TITLE')} />
+                        <input type="text" className="form-control" {...register('TITLE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Title', listData.title, 'TITLE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -351,7 +272,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">NAME</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="NAME" name="PATIENT_NAME"
+                      <input type="text" placeholder="NAME"
                         className={`form-control ${errors.PATIENT_NAME ? 'is-invalid' : ''}`}
                         {...register('PATIENT_NAME')}
                       />
@@ -361,7 +282,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">GENDER</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="GENDER" {...register('GENDER')} />
+                        <input type="text" className="form-control" {...register('GENDER')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Gender', listData.gender, 'GENDER')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -372,7 +293,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">DOB</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="DOB" {...register('DOB')} />
+                        <input type="text" className="form-control" {...register('DOB')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowCalendar('DOB')}>
                           <i className="fa fa-calendar-alt"></i>
                         </button>
@@ -383,7 +304,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">MARITAL STATUS</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="MARITAL_STATUS" {...register('MARITAL_STATUS')} />
+                        <input type="text" className="form-control" {...register('MARITAL_STATUS')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Marital Status', listData.maritalstatus, 'MARITAL_STATUS')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -394,7 +315,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">RELIGION</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="RELIGION" {...register('RELIGION')} />
+                        <input type="text" className="form-control" {...register('RELIGION')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Religion', listData.religion, 'RELIGION')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -405,7 +326,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">NATIONALITY</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="NATIONALITY" {...register('NATIONALITY')} />
+                        <input type="text" className="form-control" {...register('NATIONALITY')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Nationality', listData.country, 'NATIONALITY')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -416,7 +337,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">ETHNIC GROUP</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="ETHNIC_GROUP" {...register('ETHNIC_GROUP')} />
+                        <input type="text" className="form-control" {...register('ETHNIC_GROUP')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Ethnic Group', listData.ethnicgroup, 'ETHNIC_GROUP')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -426,7 +347,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">HEIGHT</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="HEIGHT" name="PERSON_HEIGHT"
+                      <input type="text" placeholder="HEIGHT"
                         className={`form-control ${errors.PERSON_HEIGHT ? 'is-invalid' : ''}`}
                         {...register('PERSON_HEIGHT')}
                       />
@@ -435,7 +356,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">WEIGHT</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="WEIGHT" name="PERSON_WEIGHT"
+                      <input type="text" placeholder="WEIGHT"
                         className={`form-control ${errors.PERSON_WEIGHT ? 'is-invalid' : ''}`}
                         {...register('PERSON_WEIGHT')}
                       />
@@ -445,7 +366,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">COUNTRY OF BIRTH</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="COUNTRY_OF_BIRTH" {...register('COUNTRY_OF_BIRTH')} />
+                        <input type="text" className="form-control" {...register('COUNTRY_OF_BIRTH')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Country of Birth', listData.country, 'COUNTRY_OF_BIRTH')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -456,7 +377,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">PATIENT CATEGORY</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="REFPERSONCATEGORYCODE" {...register('REFPERSONCATEGORYCODE')} />
+                        <input type="text" className="form-control" {...register('REFPERSONCATEGORYCODE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Patient Category', listData.personcategorycode, 'REFPERSONCATEGORYCODE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -467,7 +388,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">DOC TYPE</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="DOCUMENT_TYPE" {...register('DOCUMENT_TYPE')} />
+                        <input type="text" className="form-control" {...register('DOCUMENT_TYPE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Document Type', listData.idtype, 'DOCUMENT_TYPE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -477,7 +398,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">DOC NO</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="DOC NO" name="DOCUMENT_NUMBER"
+                      <input type="text" placeholder="DOC NO"
                         className={`form-control ${errors.DOCUMENT_NUMBER ? 'is-invalid' : ''}`}
                         {...register('DOCUMENT_NUMBER')}
                       />
@@ -486,7 +407,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">HOME PHONE</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="HOME PHONE" name="HOME_PHONE"
+                      <input type="text" placeholder="HOME PHONE"
                         className={`form-control ${errors.HOME_PHONE ? 'is-invalid' : ''}`}
                         {...register('HOME_PHONE')}
                       />
@@ -505,7 +426,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">STREET1</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="STREET1" name="STREET1"
+                      <input type="text" placeholder="STREET1"
                         className={`form-control ${errors.STREET1 ? 'is-invalid' : ''}`}
                         {...register('STREET1')}
                       />
@@ -514,7 +435,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">STREET2</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="STREET2" name="STREET2"
+                      <input type="text" placeholder="STREET2"
                         className={`form-control ${errors.STREET2 ? 'is-invalid' : ''}`}
                         {...register('STREET2')}
                       />
@@ -524,7 +445,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">STREET3</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="CITYCODE" {...register('CITYCODE')} />
+                        <input type="text" className="form-control" {...register('CITYCODE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Street3', listData.city, 'CITYCODE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -534,7 +455,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">POSTCODE</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="POSTCODE" name="POSTCODE"
+                      <input type="text" placeholder="POSTCODE"
                         className={`form-control ${errors.POSTCODE ? 'is-invalid' : ''}`}
                         {...register('POSTCODE')}
                       />
@@ -544,7 +465,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">STATE</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="OCITY" {...register('OCITY')} />
+                        <input type="text" className="form-control" {...register('OCITY')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('State', listData.state, 'OCITY')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -555,7 +476,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">COUNTRY</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="NATIONALITY" {...register('NATIONALITY')} />
+                        <input type="text" className="form-control" {...register('NATIONALITY')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Country', listData.country, 'NATIONALITY')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -578,7 +499,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">RELATIONSHIP</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="RELATION_DESCRIPTION" {...register('RELATION_DESCRIPTION')} />
+                        <input type="text" className="form-control" {...register('RELATION_DESCRIPTION')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Relationship', listData.relationship, 'RELATION_DESCRIPTION')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -588,7 +509,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">NOK TITLE</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="NOK TITLE" name="NOK_TITLE"
+                      <input type="text" placeholder="NOK TITLE"
                         className={`form-control ${errors.NOK_TITLE ? 'is-invalid' : ''}`}
                         {...register('NOK_TITLE')}
                       />
@@ -597,7 +518,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">NOK NAME</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="NOK NAME" name="PATIENT_NOK_NAME"
+                      <input type="text" placeholder="NOK NAME"
                         className={`form-control ${errors.PATIENT_NOK_NAME ? 'is-invalid' : ''}`}
                         {...register('PATIENT_NOK_NAME')}
                       />
@@ -607,7 +528,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">NOK DOC TYPE</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="NOK_ID_TYPE" {...register('NOK_ID_TYPE')} />
+                        <input type="text" className="form-control" {...register('NOK_ID_TYPE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('NOK Doc Type', listData.idtype, 'NOK_ID_TYPE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -617,7 +538,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">NOK DOC NO</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="NOK DOC NO" name="NOK_ID"
+                      <input type="text" placeholder="NOK DOC NO"
                         className={`form-control ${errors.NOK_ID ? 'is-invalid' : ''}`}
                         {...register('NOK_ID')}
                       />
@@ -626,8 +547,9 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">NOK MOBILE NO</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="NOK MOBILE NO" name="NOK_MOBILE_PHONE"
+                      <input type="text" placeholder="NOK MOBILE NO"
                         className={`form-control ${errors.NOK_MOBILE_PHONE ? 'is-invalid' : ''}`}
+                        {...register('NOK_MOBILE_PHONE')}
                       />
                     </div>
                   </div>
@@ -644,7 +566,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">STREET1</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="STREET1" name="NOK_STREET1"
+                      <input type="text" placeholder="STREET1"
                         className={`form-control ${errors.NOK_STREET1 ? 'is-invalid' : ''}`}
                         {...register('NOK_STREET1')}
                       />
@@ -653,7 +575,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">STREET2</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="STREET2" name="NOK_STREET2"
+                      <input type="text" placeholder="STREET2"
                         className={`form-control ${errors.NOK_STREET2 ? 'is-invalid' : ''}`}
                         {...register('NOK_STREET2')}
                       />
@@ -663,7 +585,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">STREET3</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="NOK_CITYCODE" {...register('NOK_CITYCODE')} />
+                        <input type="text" className="form-control" {...register('NOK_CITYCODE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Street3', listData.city, 'NOK_CITYCODE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -673,7 +595,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">POSTCODE</label>
                     <div className="col-sm-9">
-                      <input type="text" placeholder="POSTCODE" name="NOK_POSTCODE"
+                      <input type="text" placeholder="POSTCODE"
                         className={`form-control ${errors.NOK_POSTCODE ? 'is-invalid' : ''}`}
                         {...register('NOK_POSTCODE')}
                       />
@@ -683,7 +605,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">STATE</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="NOK_OCITY" {...register('NOK_OCITY')} />
+                        <input type="text" className="form-control" {...register('NOK_OCITY')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('State', listData.state, 'NOK_OCITY')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -694,7 +616,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-3 col-form-label">COUNTRY</label>
                     <div className="col-sm-9">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="NOK_NATIONALITY" {...register('NOK_NATIONALITY')} />
+                        <input type="text" className="form-control" {...register('NOK_NATIONALITY')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Country', listData.country, 'NOK_NATIONALITY')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -717,7 +639,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-2 col-form-label">ADMISSION DATE</label>
                     <div className="col-sm-4">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="ADMISSION_DATE" {...register('ADMISSION_DATE')} />
+                        <input type="text" className="form-control" {...register('ADMISSION_DATE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowCalendar('ADMISSION_DATE')}>
                           <i className="fa fa-calendar-alt"></i>
                         </button>
@@ -727,7 +649,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">ADMISSION TIME</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="ADMISSION TIME" name="ADMISSION_TIME"
+                      <input type="text" placeholder="ADMISSION TIME"
                         className={`form-control ${errors.ADMISSION_TIME ? 'is-invalid' : ''}`}
                         {...register('ADMISSION_TIME')}
                       />
@@ -736,7 +658,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">WARD NO</label>
                     <div className="col-sm-10">
-                      <input type="text" placeholder="WARD NO" name="WARD_NO"
+                      <input type="text" placeholder="WARD NO"
                         className={`form-control ${errors.WARD_NO ? 'is-invalid' : ''}`}
                         {...register('WARD_NO')}
                       />
@@ -746,7 +668,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-2 col-form-label">PRIMARY SPECIALITY</label>
                     <div className="col-sm-10">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="PRIMARY_SPECIALITY" {...register('PRIMARY_SPECIALITY')} />
+                        <input type="text" className="form-control" {...register('PRIMARY_SPECIALITY')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Primary Speciality', listData.speciality, 'PRIMARY_SPECIALITY')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -757,7 +679,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-2 col-form-label">PAYMENT CLASS</label>
                     <div className="col-sm-10">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="PAYMENT_CLASS_CODE" {...register('PAYMENT_CLASS_CODE')} />
+                        <input type="text" className="form-control" {...register('PAYMENT_CLASS_CODE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Payment Class', listData.wardcls, 'PAYMENT_CLASS_CODE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -779,7 +701,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">GRAVIDA</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="GRAVIDA" name="GRAVIDA"
+                      <input type="text" placeholder="GRAVIDA"
                         className={`form-control ${errors.GRAVIDA ? 'is-invalid' : ''}`}
                         {...register('GRAVIDA')}
                       />
@@ -788,7 +710,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">PARITY</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="PARITY" name="PARITY"
+                      <input type="text" placeholder="PARITY"
                         className={`form-control ${errors.PARITY ? 'is-invalid' : ''}`}
                         {...register('PARITY')}
                       />
@@ -797,7 +719,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">GESTATION PERIOD</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="GESTATION PERIOD" name="GESTATION_PERIOD"
+                      <input type="text" placeholder="GESTATION PERIOD"
                         className={`form-control ${errors.GESTATION_PERIOD ? 'is-invalid' : ''}`}
                         {...register('GESTATION_PERIOD')}
                       />
@@ -806,7 +728,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">IS MOTHER ALIVE</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="ISMOTHERALIVE TIME" name="ISMOTHERALIVE"
+                      <input type="text" placeholder="ISMOTHERALIVE TIME"
                         className={`form-control ${errors.ISMOTHERALIVE ? 'is-invalid' : ''}`}
                         {...register('ISMOTHERALIVE')}
                       />
@@ -815,7 +737,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">ANTENATAL CARE</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="REFANTENATALCARECODE" name="REFANTENATALCARECODE"
+                      <input type="text" placeholder="REFANTENATALCARECODE"
                         className={`form-control ${errors.REFANTENATALCARECODE ? 'is-invalid' : ''}`}
                         {...register('REFANTENATALCARECODE')}
                       />
@@ -824,7 +746,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">LABOUR METHOD</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="LABOUR METHOD" name="LABOUR_METHOD"
+                      <input type="text" placeholder="LABOUR METHOD"
                         className={`form-control ${errors.LABOUR_METHOD ? 'is-invalid' : ''}`}
                         {...register('LABOUR_METHOD')}
                       />
@@ -845,7 +767,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">DELIVERY DATE</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="DELIVERY DATE" name="DELIVERY_DATE" 
+                      <input type="text" placeholder="DELIVERY DATE" 
                         className={`form-control ${errors.DELIVERY_DATE ? 'is-invalid' : ''}`}
                         {...register('DELIVERY_DATE')}
                       />
@@ -854,7 +776,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">RESULT OF BIRTH</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="RESULT_OF_BIRTH" name="RESULT_OF_BIRTH"
+                      <input type="text" placeholder="RESULT_OF_BIRTH"
                         className={`form-control ${errors.RESULT_OF_BIRTH ? 'is-invalid' : ''}`}
                         {...register('RESULT_OF_BIRTH')}
                       />
@@ -864,7 +786,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-2 col-form-label">DELIVERY TYPE</label>
                     <div className="col-sm-10">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="DELIVERY_TYPE" {...register('DELIVERY_TYPE')} />
+                        <input type="text" className="form-control" {...register('DELIVERY_TYPE')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Delivery Type', listData.deliverytype, 'DELIVERY_TYPE')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -875,7 +797,7 @@ const MasterPD102Form = () => {
                     <label className="col-sm-2 col-form-label">CHILD SEX</label>
                     <div className="col-sm-10">
                       <div className="input-group">
-                        <input type="text" className="form-control" name="CHILD_SEX" {...register('CHILD_SEX')} />
+                        <input type="text" className="form-control" {...register('CHILD_SEX')} />
                         <button type="button" className="btn btn-outline-primary" onClick={() => onShowLookup('Child Sex', listData.gender, 'CHILD_SEX')}>
                           <i className="fa fa-database"></i>
                         </button>
@@ -885,7 +807,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">WEIGHT</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="WEIGHT" name="WEIGHT"
+                      <input type="text" placeholder="WEIGHT"
                         className={`form-control ${errors.WEIGHT ? 'is-invalid' : ''}`}
                         {...register('WEIGHT')}
                       />
@@ -894,7 +816,7 @@ const MasterPD102Form = () => {
                   <div className="row mb-2">
                     <label className="col-sm-2 col-form-label">LENGTH</label>
                     <div className="col-sm-4">
-                      <input type="text" placeholder="LENGTH" name="LENGTH"
+                      <input type="text" placeholder="LENGTH"
                         className={`form-control ${errors.LENGTH ? 'is-invalid' : ''}`}
                         {...register('LENGTH')}
                       />

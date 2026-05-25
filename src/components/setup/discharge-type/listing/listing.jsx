@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import ResponsivePagination from 'react-responsive-pagination'
 import { toast } from 'react-toastify'
 import { AppLoading } from '../../../AppLoading'
-import SearchInput from '../../../SearchInput'
-import SortColumn from '../../../SortColumn'
-import ConfirmModal from '../../../ConfirmModal'
-import { CityService } from '../api'
+import { SearchInput } from '../../../SearchInput'
+import { SortColumn } from '../../../SortColumn'
+import { ConfirmModal } from '../../../ConfirmModal'
+import { DischargeTypeService } from '../api'
 import { AppConstant } from '../../../../constants'
 
-const CityListing = () => {
-  const uiState = 'setup.city.city-listing'
-  const title = 'City'
+const DischargeTypeListing = () => {
+  const uiState = 'setup.discharge-type.discharge-type-listing'
+  const title = 'Discharge Type'
   const pageSize = AppConstant.PAGE_SIZE
 
   const navigate = useNavigate()
@@ -63,7 +63,7 @@ const CityListing = () => {
   const load = async () => {
     setUiData(prev => ({ ...prev, loading: true }))
     try {
-      const response = await CityService.list(uiData.page, pageSize, uiData.sort, uiData.sortDir)
+      const response = await DischargeTypeService.list(uiData.page, pageSize, uiData.sort, uiData.sortDir)
       setUiData(prev => ({
         ...prev,
         loading: false,
@@ -82,7 +82,7 @@ const CityListing = () => {
   const onSearch = async (e) => {
     setUiData(prev => ({ ...prev, search: e, page: 1, loading: true }))
     try {
-      const response = await CityService.search(uiData.page, pageSize, uiData.sort, uiData.sortDir, e)
+      const response = await DischargeTypeService.search(uiData.page, pageSize, uiData.sort, uiData.sortDir, e)
       setUiData(prev => ({
         ...prev,
         loading: false,
@@ -130,7 +130,7 @@ const CityListing = () => {
 
   const goto = (path) => {
     saveUIState()
-    navigate(`/main/setup/city/${path}`, { replace: false })
+    navigate(`/main/setup/discharge-type/${path}`, { replace: false })
   }
 
   const onEdit = (item) => {
@@ -139,7 +139,7 @@ const CityListing = () => {
   }
 
   const onDelete = (item) => {
-    setDeleteModal(prev => ({ ...prev, show: true, id: item.id, message: `Are you sure to delete this City ${item.code} ?` }))
+    setDeleteModal(prev => ({ ...prev, show: true, id: item.id, message: `Are you sure to delete this ${title} ${item.code} ?` }))
   }
 
   const onCancelDelete = () => {
@@ -147,9 +147,9 @@ const CityListing = () => {
   }
 
   const onConfirmDelete = async () => {
-    const b = await CityService.remove(deleteModal.id)
+    const b = await DischargeTypeService.remove(deleteModal.id)
     if (b) {
-      toast.success('City successfully deleted')
+      toast.success(`${title} successfully deleted`)
       setDeleteModal(prev => ({ ...prev, show: false }))
       setRefresh(prev => !prev)
     }
@@ -249,7 +249,7 @@ const CityListing = () => {
       </div>
       <ConfirmModal
         show={deleteModal.show}
-        title='Delete City'
+        title={`Delete ${title}`}
         message={deleteModal.message}
         onCancel={() => onCancelDelete()}
         onConfirm={() => onConfirmDelete()}
@@ -258,4 +258,4 @@ const CityListing = () => {
   )
 }
 
-export default CityListing
+export default DischargeTypeListing

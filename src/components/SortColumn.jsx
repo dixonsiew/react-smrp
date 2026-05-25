@@ -1,6 +1,6 @@
 import './SortColumn.css'
 
-const SortColumn = ({ name, sort, dir, current, onSortBy }) => {
+export const SortColumn = ({ name, sort, dir, current, onSortBy }) => {
   const getIconClass = () => {
     if (isSortBy('asc')) return 'fa-sort-up'
     if (isSortBy('desc')) return 'fa-sort-down'
@@ -33,5 +33,3 @@ const SortColumn = ({ name, sort, dir, current, onSortBy }) => {
     </div>
   )
 }
-
-export default SortColumn

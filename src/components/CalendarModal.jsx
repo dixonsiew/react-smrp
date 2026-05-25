@@ -22,7 +22,7 @@ const CalendarModal = ({ onCancelCb, onConfirm, selected, show }) => {
     if (selected !== '') {
       onChange(selected)
     }
-  }, [selected])
+  }, [selected, show])
 
   const onCancel = () => {
     onCancelCb()

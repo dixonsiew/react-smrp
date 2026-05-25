@@ -121,13 +121,43 @@ const _nav = [
     items: [
       {
         component: CNavItem,
+        name: 'Birth Delivery Type',
+        to: '/main/setup/delivery-type/list',
+      },
+      {
+        component: CNavItem,
         name: 'City',
         to: '/main/setup/city/list',
       },
       {
         component: CNavItem,
+        name: 'Country',
+        to: '/main/setup/country/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Diagnosis Item Type',
+        to: '/main/setup/diag-item-type/list',
+      },
+      {
+        component: CNavItem,
         name: 'Discharge Officer Type',
         to: '/main/setup/discharge-officer/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Discharge Type',
+        to: '/main/setup/discharge-type/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Ethnic Group',
+        to: '/main/setup/ethnic-group/list',
+      },
+      {
+        component: CNavItem,
+        name: 'Gender',
+        to: '/main/setup/gender/list',
       },
     ],
   },

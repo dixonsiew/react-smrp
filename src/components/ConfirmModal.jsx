@@ -8,7 +8,7 @@ import {
   CModalTitle
 } from '@coreui/react'
 
-const ConfirmModal = ({ onCancel, onConfirm, title, message, show }) => {
+export const ConfirmModal = ({ onCancel, onConfirm, title, message, show }) => {
   const onNo = () => {
     onCancel()
   }
@@ -37,5 +37,3 @@ const ConfirmModal = ({ onCancel, onConfirm, title, message, show }) => {
     </CModal>
   )
 }
-
-export default ConfirmModal

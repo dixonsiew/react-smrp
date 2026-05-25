@@ -6,6 +6,7 @@ import { CityService } from '../api'
 import { AppLoading } from '../../../AppLoading'
 
 const CityCreate = () => {
+  const title = 'City'
   const childRef = useRef()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -34,13 +35,13 @@ const CityCreate = () => {
     if (!edit) {
       const b = await CityService.create(data)
       if (b) {
-        toast.success('New City successfully created')
+        toast.success(`New ${title} successfully created`)
         childRef.current.resetForm()
       }
     } else {
       const b = await CityService.update(id, data)
       if (b) {
-        toast.success('City successfully updated')
+        toast.success(`${title} successfully updated`)
       }
     }
   }
@@ -51,7 +52,7 @@ const CityCreate = () => {
 
   return (
     <Create
-      title="City"
+      title={title}
       data={data}
       loading={loading}
       onFormSubmit={formSubmit}

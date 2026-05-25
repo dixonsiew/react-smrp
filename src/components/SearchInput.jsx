@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const SearchInput = ({ msearch, onSearch }) => {
+export const SearchInput = ({ msearch, onSearch }) => {
   const [search, setSearch] = useState(msearch)
 
   const onHandleSearch = () => {
@@ -37,5 +37,3 @@ const SearchInput = ({ msearch, onSearch }) => {
     </div>
   )
 }
-
-export default SearchInput
