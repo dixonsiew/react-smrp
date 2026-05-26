@@ -75,7 +75,7 @@ const App = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/react-smrp'>
       <Suspense
         fallback={
           <div className="d-flex justify-content-center align-items-center vh-100">

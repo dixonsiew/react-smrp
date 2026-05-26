@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-const schema = yup.object({
+export const schema = yup.object({
   ACCOUNT_NO: yup.string().optional(),
   ADMISSION_DATE: yup.string().optional(),
   ADMISSION_STATUS: yup.string().optional(),
