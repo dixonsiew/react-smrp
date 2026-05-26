@@ -171,10 +171,10 @@ const UserCreate = () => {
                   )}
                   {!lockRole && (
                     <select 
-                      className={`form-control ${errors.role_id ? 'is-invalid' : ''}`} 
+                      className={`form-select ${errors.role_id ? 'is-invalid' : ''}`} 
                       {...register('role_id')}
                     >
-                      <option value="999">Please select</option>
+                      <option value="" disabled>Please select</option>
                       {roles.map((role) => (
                         <option key={role.id} value={role.id}>
                           {role.name}

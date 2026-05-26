@@ -17,20 +17,18 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [visible, setVisible] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
   const {login} = useAuth()
 
   const handleSubmit = async (e) => {
     setIsLoading(true)
-    setError('')
 
     let result
     if (isLogin) {
@@ -46,12 +44,19 @@ const Login = () => {
     setIsLoading(false)
 
     if (!result.success) {
-      setError(result.error)
-      setVisible(true)
+      toast.error(result.error, {
+        position: 'top-center'
+      })
     } else {
       navigate('/home')
     }
   };
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e)
+    }
+  }
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
@@ -61,7 +66,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm className='needs-validation' onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <p className="text-body-secondary">Sign In to your account</p>
                     <CInputGroup className="mb-3">
@@ -73,6 +78,7 @@ const Login = () => {
                         autoComplete="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        onKeyDown={onKeyDown}
                         required
                       />
                     </CInputGroup>
@@ -86,12 +92,13 @@ const Login = () => {
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={onKeyDown}
                         required
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4" onClick={handleSubmit} disabled={isLoading}>
+                        <CButton type='submit' color="primary" className="px-4" disabled={isLoading}>
                           Login
                         </CButton>
                       </CCol>
@@ -99,12 +106,6 @@ const Login = () => {
                         
                       </CCol>
                     </CRow>
-                    {error &&
-                      <div className="mt-2">
-                        <CAlert color="danger" dismissible visible={visible} onClose={() => setVisible(false)}>
-                          {error}
-                        </CAlert>
-                      </div>}
                   </CForm>
                 </CCardBody>
               </CCard>
