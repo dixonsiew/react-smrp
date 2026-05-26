@@ -19,7 +19,7 @@ const schema = yup.object({
   first_name: yup.string()
     .required('First name is required'),
   last_name: yup.string().optional(),
-  role_id: yup.number().required('Role is required'),
+  role_id: yup.string().required('Role is required'),
 }).required()
 
 const UserCreate = () => {
@@ -82,7 +82,7 @@ const UserCreate = () => {
       last_name: data.last_name
     }
     if (!lockRole) {
-      o['role_id'] = data.role_id
+      o['role_id'] = Number(data.role_id)
     }
 
     if (!edit) {
