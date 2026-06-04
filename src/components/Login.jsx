@@ -28,6 +28,7 @@ const Login = () => {
   const {login} = useAuth()
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
     setIsLoading(true)
 
     let result
